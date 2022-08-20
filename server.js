@@ -17,11 +17,13 @@ MongoClient.connect('mongodb+srv://song0726:song033634120@cluster0.jkh1uqu.mongo
 })
 
 app.get('/', function(req, res){
-   res.sendFile(__dirname + '/index.html');
+   // res.sendFile(__dirname + '/index.html');
+   res.render('index.ejs');
 });
 
 app.get('/write', function(req, res){
-   res.sendFile(__dirname + '/write.html');
+   // res.sendFile(__dirname + '/write.html');
+   res.render('write.ejs');
 });
 
 app.post('/add', function(req, res){   
@@ -39,7 +41,23 @@ app.post('/add', function(req, res){
 
 app.get('/list', function(req, res){
    db.collection('study').find().toArray(function(err, result){
-      console.log(result);
+      // console.log(result);
       res.render('list.ejs', {data : result});
    })
 });
+
+app.delete('/del', function(req, res){
+   req.body._id = parseInt(req.body._id);
+   db.collection('study').deleteOne(req.body, function(err, result){      
+      console.log(req.body);
+      console.log('삭제완료');
+      res.status(200).send({ message : '성공했습니다.'});
+   })
+});
+
+
+app.get('/detail/:id', function(req, res){
+   db.collection('study').findOne({_id : parseInt(req.params.id)}, function(err, result){
+      res.render('detail.ejs', {n : result});
+   })
+})

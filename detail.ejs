@@ -11,7 +11,7 @@
 </head>
 
 <body>
-   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
          <a class="navbar-brand" href="/">DailySchedule</a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -26,24 +26,16 @@
             </div>
          </div>
       </div>
-   </nav> -->
-
-   <%- include('navbar.html') %>
-
+   </nav>
 
    <div class="container my-4">
-      <h2 class="text-center">Study List</h2>
-      <% for(var i=0; i < data.length; i++){ %>
+      <h2 class="text-center">상세정보</h2>
          <div class="card mt-3" style="width: 100%;">
             <div class="card-body">
-               <p class="card-text mb-2">No. <%= data[i]._id %></p>
-               <h5 class="card-title">목표 : <%= data[i].goal %></h5>
-               <p class="card-text mb-2">내용: <%= data[i].content %></p>
-               <a href="#" class="card-link">세부사항</a><br>
+               <h5 class="card-title">목표 : <%= n.goal %></h5>
+               <p class="card-text mb-2">내용: <%= n.content %></p>
             </div>
-            <button class="btn btn-danger mt-2 w-25" data-cnt="<%= data[i]._id %>">삭제</button>
          </div>
-      <% } %>
    </div>
 
    <script
@@ -54,23 +46,7 @@
    src="https://code.jquery.com/jquery-3.6.0.min.js"integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
    </script>
 
-   <script>
-      $('.btn').on('click', function(e){
-         console.log(this);
-         $.ajax({
-            method : 'DELETE',
-            url : '/del',
-            data : { _id : e.target.dataset.cnt}
-         }).done((result)=>{
-            console.log(this);
-            $(this).parent('div').fadeOut();
-         }).fail(function(err){
-            console.log('Error!!');
-         });
-      })
-
-
-   </script>
+   
 </body>
 
 </html>
